@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>生日快乐，我的朋友珊珊</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            color: #333;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .stage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease;
+        }
+
+        /* 阶段1：首页图片 */
+        #stage1 {
+            opacity: 1;
+            z-index: 10;
+        }
+        #stage1.hidden {
+            opacity: 0;
+            z-index: 1;
+        }
+        #stage1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 阶段2：打字机文字 */
+        #stage2 {
+            opacity: 0;
+            z-index: 5;
+            padding: 40px 30px;
+            text-align: center;
+            font-size: 16px;
+            max-width: 100%;
+            overflow-y: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #stage2.show {
+            opacity: 1;
+        }
+        #typewriter {
+            font-size: 18px;
+            white-space: pre-line;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* 阶段3：图片 + 诗句 */
+        #stage3 {
+            opacity: 0;
+            z-index: 5;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        #stage3.show {
+            opacity: 1;
+        }
+        #stage3 img {
+            width: 85% !important;
+            max-width: 900px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .poem {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            white-space: pre-line;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            #typewriter, .poem {
+                font-size: 16px;
+                padding: 15px;
+            }
+            #stage3 img {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 阶段1：首页图片 -->
+    <div id="stage1" class="stage">
+        <img src="https://raw.githubusercontent.com/18716993804/my-birthday/main/%E9%A6%96%E9%A1%B5%E8%BF%9B%E5%85%A5.jpg" alt="首页进入">
+    </div>
+
+    <!-- 阶段2：打字机文字 -->
+    <div id="stage2" class="stage">
+        <div id="typewriter"></div>
+    </div>
+
+    <!-- 阶段3：第二张图片 + 诗句 -->
+    <div id="stage3" class="stage">
+        <img src="https://raw.githubusercontent.com/18716993804/my-birthday/main/retouch_2024050320531680.jpg" alt="第二张图片">
+        <div class="poem">我们坐在洱海旁
+用眼睛分食同一片光
+五月的风拂来
+我们的影子波光荡漾
+
+三十岁冲来的海浪
+映出青春里的模样
+我们躺在操场上
+所有星光为我们点亮
+
+蒲公英驮走夕阳
+浪花在结网
+网住所有迷路的贝壳
+你为我指引方向
+
+当月亮开始修剪轮廓
+我们默契对望
+共享暗涌里发芽的
+温馨家园的早上</div>
+    </div>
+
+    <script>
+        // ✅ 音乐链接（使用 jsDelivr 加速并解决 CORS）
+        const musicUrl = "https://cdn.jsdelivr.net/gh/18716993804/my-birthday@main/haiyouwotentni.mp3";
+        const audio = new Audio(musicUrl);
+        audio.loop = false; // 可根据需要设为 true
+
+        // 文字内容（保留段落结构）
+        const textContent = `我们走着，从那个总是飘着粉笔灰的中学门口，一直走到今天。
+走到这扇能望见些许江水的、你的三十岁的窗前。
+中间竟已是十几度的寒暑了。
+吹蜡烛了吗？有没有发现桌上蛋糕的烛火，小小的，怯怯的，却又执拗地亮着，
+像我们十七岁晚自习时，在被窝里偷偷点燃的仙侠梦。
+
+
+十几岁的你，有着厚厚的刘海，总爱坐在座位上，一个人发呆。
+当然，那只是表象，因为十几岁的你，比谁都叛逆。
+逃出校门，早恋，喝酒，当然努力才是我们青春的模样。
+那时，你的影子投在练习册上，像一行行会移动的诗。
+而我，便是在那时，悄悄偷望你侧影的轮廓。
+我们都向往未来，向往那个叫作“长大”的陌生的城池。
+而我们必须要像两棵挨着的、沉默的树，在地底下，让根须悄悄地缠在一起。
+
+
+后来，我们像两粒被风吹远的种子，落在不同的土壤里。
+你那里多雨，我这边常旱。
+我常常在想异乡街灯的清冷，是否伴随一段不肯与人言说的心事的凋零？
+我们常常联系，但也仿佛在两个互不相关的世界里，忙着生，或者忙着病。
+可奇怪的是，每当我最觉得要沉下去的时候，总能想起你。
+不是想起你的劝慰，而是一种感觉，让人安心的感觉。
+顾城说：“风在摇它的叶子，草在结它的籽，我们站着，不说话，就十分美好。”
+我想，我们便是这样的。
+
+
+三十岁，像一道门槛。
+门外是兵荒马乱的世界，门内是这点亮着烛光的、属于我们的一小片宁静。
+无论怎样，去闯吧，你总会闯出一片辉煌。
+在《心灵捕手》里最后的一幕，查克知道威尔走后，眼里的哀伤和嘴角的喜悦，
+脚步是送别的交响曲，是不舍，更是祝福。
+我永远祝福你，我的朋友珊珊。
+
+
+吹蜡烛吧。
+愿你的眼睛，忙着追逐六便士时，也能看见天上的月亮；
+愿我的祝福，像我们十八岁的酣畅淋漓，永远充满生机。
+继续走下去吧，岁岁年年。`;
+
+        // DOM 元素
+        const stage1 = document.getElementById('stage1');
+        const stage2 = document.getElementById('stage2');
+        const stage3 = document.getElementById('stage3');
+        const typewriter = document.getElementById('typewriter');
+
+        // 打字机速度：约 2.5 字/秒（更自然）
+        const typeSpeed = 400; // 毫秒/字
+
+        // 阶段控制
+        function startStage2() {
+            stage1.classList.add('hidden');
+            stage2.classList.add('show');
+
+            // 打字机效果
+            let i = 0;
+            typewriter.textContent = '';
+            const timer = setInterval(() => {
+                if (i < textContent.length) {
+                    typewriter.textContent += textContent.charAt(i);
+                    i++;
+                    // 自动滚动到底部
+                    typewriter.parentElement.scrollTop = typewriter.parentElement.scrollHeight;
+                } else {
+                    clearInterval(timer);
+                    // 3秒后进入第三阶段
+                    setTimeout(startStage3, 3000);
+                }
+            }, typeSpeed);
+        }
+
+        function startStage3() {
+            stage2.classList.remove('show');
+            stage3.classList.add('show');
+        }
+
+        // 自动播放音乐（兼容微信/QQ浏览器）
+        function tryPlayMusic() {
+            audio.play().then(() => {
+                console.log('🎵 音乐已播放');
+            }).catch(err => {
+                console.log('⚠️ 播放被阻止，等待用户交互', err);
+                // 用户轻触屏幕即可播放
+                const unlock = () => {
+                    audio.play();
+                    document.body.removeEventListener('touchstart', unlock);
+                    console.log('🔓 音乐已解锁');
+                };
+                document.body.addEventListener('touchstart', unlock, { once: true });
+            });
+        }
+
+        // 页面加载后开始
+        window.onload = () => {
+            tryPlayMusic(); // 尝试自动播放
+            setTimeout(startStage2, 18000); // 18秒后进入打字机阶段
+        };
+    </script>
+</body>
+</html>
